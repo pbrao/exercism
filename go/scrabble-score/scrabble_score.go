@@ -1,31 +1,28 @@
 package scrabble
 
-import (
-	"strings"
-)
+import "unicode"
 
 // Score calculates the numeric Scrabble score and returns it
 func Score(word string) int {
 
 	score := 0
 
-	word = strings.ToLower(word)
-
 	for i, letter := range word {
-		switch {
-		case strings.ContainsAny(string(letter), "a || e || i || o || u || l || n || r || s || t"):
+		letter = unicode.ToLower(letter)
+		switch letter {
+		case 'a', 'e', 'i', 'o', 'u', 'l', 'n', 'r', 's', 't':
 			score++
-		case strings.ContainsAny(string(letter), "d || g"):
+		case 'd', 'g':
 			score += 2
-		case strings.ContainsAny(string(letter), "b || c || m || p"):
+		case 'b', 'c', 'm', 'p':
 			score += 3
-		case strings.ContainsAny(string(letter), "f || h || v || w || y"):
+		case 'f', 'h', 'v', 'w', 'y':
 			score += 4
-		case strings.ContainsAny(string(letter), "k"):
+		case 'k':
 			score += 5
-		case strings.ContainsAny(string(letter), "j || x"):
+		case 'j', 'x':
 			score += 8
-		case strings.ContainsAny(string(letter), "q || z"):
+		case 'q', 'z':
 			score += 10
 		}
 
